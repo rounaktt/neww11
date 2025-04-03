@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Background Remover</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #222; /* Dark background */
+            color: white; /* Text color changed to white for contrast */
+        }
+        #upload-container {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            display: inline-block;
+            cursor: pointer;
+            background-color: #333; /* Slightly lighter dark shade */
+            color: white;
+        }
+        #image-preview {
+            margin-top: 20px;
+            max-width: 100%;
+        }
+        #download-btn {
+            display: none;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Background Remover</h1>
+    <div id="upload-container" onclick="document.getElementById('image-input').click()">
+        <p>Click to Upload Image</p>
+        <input type="file" id="image-input" accept="image/*" style="display: none;">
+    </div>
+    <img id="image-preview" src="" alt="" />
+    <button id="download-btn">Download Image</button>
+
+    <script>
+        const imageInput = document.getElementById('image-input');
+        const imagePreview = document.getElementById('image-preview');
+        const downloadBtn = document.getElementById('download-btn');
+
+        imageInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+                downloadBtn.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
